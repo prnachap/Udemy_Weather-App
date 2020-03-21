@@ -6,19 +6,17 @@ const secondpara = document.querySelector(".second");
 weatherForm.addEventListener("submit", e => {
   firstPara.textContent = "...Loading";
   secondpara.textContent = "";
-  fetch(`http://localhost:3000/weather?address=${address.value}`).then(
-    response => {
-      response.json().then(data => {
-        if (data.error) {
-          firstPara.textContent = data.error;
-          secondpara.value = "";
-        } else {
-          firstPara.textContent = data.location;
-          secondpara.textContent = data.forecast;
-        }
-      });
-    }
-  );
+  fetch(`/weather?address=${address.value}`).then(response => {
+    response.json().then(data => {
+      if (data.error) {
+        firstPara.textContent = data.error;
+        secondpara.value = "";
+      } else {
+        firstPara.textContent = data.location;
+        secondpara.textContent = data.forecast;
+      }
+    });
+  });
 
   e.preventDefault();
 });
